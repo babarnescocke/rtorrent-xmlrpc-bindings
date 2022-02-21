@@ -34,7 +34,7 @@ mod raw {
     raw_impl::define_builder!(MultiBuilder4, MultiBuilder5, phantom_a A, phantom_b B, phantom_c C , phantom_d D | phantom_e E);
     raw_impl::define_builder!(MultiBuilder5, MultiBuilder6, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E | phantom_g G);
     raw_impl::define_builder!(MultiBuilder6, MultiBuilder7, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E, phantom_g G | phantom_h H);
-    raw_impl::define_builder!(MultiBuilder7, MultiBuilder8, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E, phantom_g G , phantom_h H, phantom_i I);
+    raw_impl::define_builder!(MultiBuilder7, MultiBuilder8, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E, phantom_g G , phantom_h H | phantom_i I);
 }
 
 /// The `d` module builds multicalls over `Download`s
@@ -92,7 +92,7 @@ pub mod d {
         MultiBuilder6, MultiBuilder7, phantom_a A, phantom_b B, phantom_c C , phantom_d D, phantom_e E, phantom_g G | phantom_h H);
     define_builder!(
         /// `MultiBuilder8` represents a four-column query over all `Download`s in a view
-        MultiBuilder7, MultiBuilder8, phantom_a A, phantom_b B, phantom_c C , phantom_d D, phantom_e E, phantom_g G , phantom_h H, phantom_i I);
+        MultiBuilder7, MultiBuilder8, phantom_a A, phantom_b B, phantom_c C , phantom_d D, phantom_e E, phantom_g G , phantom_h H | phantom_i I);
 }
 
 /// The `f` module builds multicalls over `File`s in a `Download`
