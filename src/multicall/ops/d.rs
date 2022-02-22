@@ -100,9 +100,9 @@ d_op_const!(
 d_op_const!(
     /// The number of completed bytes.
     COMPLETED_BYTES, i64, "completed_bytes");
-d_op_const!()
+d_op_const!(
 //for left bytes
-    LEFT_BYTES, i64, "left_bytes";
+    LEFT_BYTES, i64, "left_bytes");
 d_op_const!(
     /// The number of completed chunks (pieces).
     COMPLETED_CHUNKS, i64, "completed_chunks");
