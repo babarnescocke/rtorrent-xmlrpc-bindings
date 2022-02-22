@@ -251,6 +251,9 @@ impl Download {
         /// Get the size, in bytes, of the torrent contents.
         size_bytes);
     d_int_getter!(
+        /// Get the bytes left to verify and/or download.
+        left_bytes);
+    d_int_getter!(
         /// Get the number of files associated with this download.
         size_files);
     d_bool_getter!(
