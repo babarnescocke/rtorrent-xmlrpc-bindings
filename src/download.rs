@@ -247,6 +247,8 @@ impl Download {
 
     d_bool_getter!(start);
 
+    d_bool_getter!(stop);
+
     d_str_getter!(
         /// The metafile from which this download was created.
         loaded_file
