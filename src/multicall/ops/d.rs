@@ -141,6 +141,12 @@ d_op_const!(
     bool,
     "is_active"
 );
+d_op_const!(
+    //is thist torrent hashing?
+    IS_HASH_CHECKING,
+    bool,
+    "is_hash_checking"
+);
 d_op_const!(IS_OPEN, bool, "is_open");
 d_op_const!(IS_CLOSED, bool, "is_closed");
 d_op_const!(

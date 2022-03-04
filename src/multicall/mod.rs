@@ -20,7 +20,10 @@ mod raw_impl;
 mod raw {
     use super::raw_impl;
 
-    use crate::{value_conversion::{self, TryFromValue}, Error, Result};
+    use crate::{
+        value_conversion::{self, TryFromValue},
+        Error, Result,
+    };
     use std::marker::PhantomData;
     use xmlrpc::Value;
 
@@ -35,6 +38,7 @@ mod raw {
     raw_impl::define_builder!(MultiBuilder5, MultiBuilder6, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E | phantom_g G);
     raw_impl::define_builder!(MultiBuilder6, MultiBuilder7, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E, phantom_g G | phantom_h H);
     raw_impl::define_builder!(MultiBuilder7, MultiBuilder8, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E, phantom_g G , phantom_h H | phantom_i I);
+    raw_impl::define_builder!(MultiBuilder8, MultiBuilder9, phantom_a A, phantom_b B, phantom_c C , phantom_d D , phantom_e E, phantom_g G , phantom_h H , phantom_i I | phantom_j J);
 }
 
 /// The `d` module builds multicalls over `Download`s
@@ -64,8 +68,8 @@ mod raw {
 ///
 /// [`d::MultiBuilder`]: crate::multicall::d::MultiBuilder
 pub mod d {
-    use crate::{value_conversion::TryFromValue, Result};
     use super::{ops, raw};
+    use crate::{value_conversion::TryFromValue, Result};
 
     pub use ops::d::*;
 
@@ -93,6 +97,9 @@ pub mod d {
     define_builder!(
         /// `MultiBuilder8` represents a four-column query over all `Download`s in a view
         MultiBuilder7, MultiBuilder8, phantom_a A, phantom_b B, phantom_c C , phantom_d D, phantom_e E, phantom_g G , phantom_h H | phantom_i I);
+    define_builder!(
+        /// `MultiBuilder9` represents a four-column query over all `Download`s in a view
+        MultiBuilder8, MultiBuilder9, phantom_a A, phantom_b B, phantom_c C , phantom_d D, phantom_e E, phantom_g G , phantom_h H , phantom_i I | phantom_j J);
 }
 
 /// The `f` module builds multicalls over `File`s in a `Download`
@@ -122,8 +129,8 @@ pub mod d {
 ///
 /// [`f::MultiBuilder`]: crate::multicall::f::MultiBuilder
 pub mod f {
-    use crate::{value_conversion::TryFromValue, Result};
     use super::{ops, raw};
+    use crate::{value_conversion::TryFromValue, Result};
 
     pub use ops::f::*;
 
@@ -171,8 +178,8 @@ pub mod f {
 ///
 /// [`p::MultiBuilder`]: crate::multicall::p::MultiBuilder
 pub mod p {
-    use crate::{value_conversion::TryFromValue, Result};
     use super::{ops, raw};
+    use crate::{value_conversion::TryFromValue, Result};
 
     pub use ops::p::*;
 
@@ -223,8 +230,8 @@ pub mod p {
 ///
 /// [`t::MultiBuilder`]: crate::multicall::t::MultiBuilder
 pub mod t {
-    use crate::{value_conversion::TryFromValue, Result};
     use super::{ops, raw};
+    use crate::{value_conversion::TryFromValue, Result};
 
     pub use ops::t::*;
 
@@ -241,4 +248,3 @@ pub mod t {
         /// `MultiBuilder4` represents a four-column query over all `Tracker`s for a `Download`
         MultiBuilder3, MultiBuilder4, phantom_a A, phantom_b B, phantom_c C | phantom_d D);
 }
-
