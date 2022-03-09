@@ -146,6 +146,9 @@ pub mod f {
     define_builder!(
         /// `MultiBuilder4` represents a four-column query over all `File`s in a `Download`
         MultiBuilder3, MultiBuilder4, phantom_a A, phantom_b B, phantom_c C | phantom_d D);
+    define_builder!(
+        /// `MultiBuilder5` represents a four-column query over all `File`s in a `Download`
+        MultiBuilder4, MultiBuilder5, phantom_a A, phantom_b B, phantom_c C , phantom_d D | phantom_e E);
 }
 
 /// The `p` module builds multicalls over `Peer`s on a `Download`
@@ -199,6 +202,14 @@ pub mod p {
         /// `MultiBuilder4` represents a four-column query over all swarm `Peers` associated with a
         /// `Download`
         MultiBuilder3, MultiBuilder4, phantom_a A, phantom_b B, phantom_c C | phantom_d D);
+    define_builder!(
+        /// `MultiBuilder5` represents a four-column query over all swarm `Peers` associated with a
+        /// `Download`
+        MultiBuilder4, MultiBuilder5, phantom_a A, phantom_b B, phantom_c C , phantom_d D | phantom_e E);
+    define_builder!(
+        /// `MultiBuilder6` represents a four-column query over all swarm `Peers` associated with a
+        /// `Download`
+        MultiBuilder5, MultiBuilder6, phantom_a A, phantom_b B, phantom_c C , phantom_d D, phantom_e E | phantom_f F);
 }
 
 /// The `t` module builds multicalls over `Trackers`s associated with a `Download`

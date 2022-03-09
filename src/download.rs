@@ -246,8 +246,10 @@ impl Download {
     d_bool_getter!(is_closed);
 
     d_bool_getter!(start);
-
     d_bool_getter!(stop);
+    d_bool_getter!(erase);
+    d_bool_getter!(check_hash);
+    d_bool_getter!(tracker_announce);
 
     d_str_getter!(
         /// The metafile from which this download was created.
@@ -282,6 +284,7 @@ impl Download {
         /// Get the number of files associated with this download.
         size_files
     );
+    //d_str_setter!(erase);
     d_bool_getter!(
         /// Get the state (`false` is stopped).
         state

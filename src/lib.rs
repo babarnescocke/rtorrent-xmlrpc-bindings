@@ -57,8 +57,6 @@ d::MultiBuilder::new(&my_handle, "default")
 [`Server`]: crate::Server
 !*/
 
-use std::error;
-use std::fmt;
 use std::sync::Arc;
 use xmlrpc::{Request, Value};
 
@@ -182,7 +180,12 @@ impl Server {
         "system.hostname",
         String
     );
-
+    server_getter!(
+        /// Exit rtorrent
+        exit_rtorrent,
+        "system.shutdown.normal",
+        i64
+    );
     server_getter!(
         /// Get the XMLRPC API version associated with this instance.
         api_version,
