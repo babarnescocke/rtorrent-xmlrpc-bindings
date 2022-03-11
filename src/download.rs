@@ -266,6 +266,10 @@ impl Download {
         /// Get the name of the torrent.
         name
     );
+    d_str_getter!(
+        /// Get the bitfield of the torrent.
+        bitfield
+    );
 
     d_f1000_getter!(
         /// Get the upload/download ratio for this download.
