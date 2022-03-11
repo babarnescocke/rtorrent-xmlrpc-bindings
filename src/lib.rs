@@ -122,7 +122,16 @@ macro_rules! server_getter {
         }
     }
 }
-
+macro_rules! server_execer {
+    ($(#[$meta:meta])* $method: ident, $api: literal, $ty: ty) => {
+        $(#[$meta])*
+        pub fn $method(&self) -> Result<$ty> {
+            let val = Request::new($api)
+                .call_url(self.endpoint())?;
+            <$ty as TryFromValue>::try_from_value(&val)
+        }
+    }
+}
 #[derive(Debug)]
 struct ServerInner {
     endpoint: String,
@@ -167,7 +176,12 @@ impl Server {
             .map(|v| Download::from_value(&self, v))
             .collect()
     }
-
+    server_getter!(
+        /// Get the PID associated with this rtorrent instance.
+        pid,
+        "system.pid",
+        i64
+    );
     server_getter!(
         /// Get the IP address associated with this rtorrent instance.
         ip,
