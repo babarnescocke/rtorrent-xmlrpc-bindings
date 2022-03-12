@@ -122,16 +122,7 @@ macro_rules! server_getter {
         }
     }
 }
-macro_rules! server_execer {
-    ($(#[$meta:meta])* $method: ident, $api: literal, $ty: ty) => {
-        $(#[$meta])*
-        pub fn $method(&self) -> Result<$ty> {
-            let val = Request::new($api)
-                .call_url(self.endpoint())?;
-            <$ty as TryFromValue>::try_from_value(&val)
-        }
-    }
-}
+
 #[derive(Debug)]
 struct ServerInner {
     endpoint: String,
@@ -176,6 +167,39 @@ impl Server {
             .map(|v| Download::from_value(&self, v))
             .collect()
     }
+
+    // this exec.capture is a very powerful api call. basically we can pass a comma delineated list of commands and rtorrent will try to run that command; capture output, or error - and return it.
+    // to clarify, this give the caller of the exec.capture has shell access as the user rtorrent is running as. Major security  issues. Therefore I don't want to expand it as a macro callable with whatever - its sketchy enough as is.
+    // I wish there was a way to do this to just return the uptime from rtorrent, but here we are. This creates a shell for us - fires ps only printing elapsed time and pid and then we just grep for pid.
+    // The problem here, is that ps isn't really a universal interface - different linuxes have different options BSD is different. The below runs on alpine- and that is so minimal that I kind of just hope that extrapolates out. it turns out in podman if you run the stat command on /proc/ files many of them have a creation date of now... so that is basically useless.
+    pub fn up_time_exec(&self) -> Result<String> {
+        let raw_response = Request::new("execute.capture")
+            .arg("")
+            .arg("sh")
+            .arg("-c")
+            .arg("echo hello")
+            .call_url(self.endpoint())?;
+        <String as TryFromValue>::try_from_value(&raw_response)
+    }
+    pub fn delete_path_exec(&self, path: String) -> Result<String> {
+        let raw_response = Request::new("execute.capture")
+            .arg("")
+            .arg("sh")
+            .arg("-c")
+            .arg("rm")
+            .arg("-vrf")
+            .arg(format!("{}", path))
+            .call_url(self.endpoint())?;
+        <String as TryFromValue>::try_from_value(&raw_response)
+    }
+    pub fn add_tor_started_exec(&self, tor: String) -> Result<i64> {
+        let raw_response = Request::new("load.start_verbose")
+            .arg("")
+            .arg(tor)
+            .call_url(self.endpoint())?;
+        <i64 as TryFromValue>::try_from_value(&raw_response)
+    }
+
     server_getter!(
         /// Get the PID associated with this rtorrent instance.
         pid,
